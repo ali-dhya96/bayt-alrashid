@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحميل تطبيق بيت الراشد</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* 🌟 أنيميشن لتحريك الخلفية ببطء */
+        @keyframes slideBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            color: #ffffff;
+            font-family: Tahoma, sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            background-color: #164841;
+        }
+
+        /* 🌟 الطبقة الخلفية المتحركة */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(22, 72, 65, 0.85), rgba(16, 52, 47, 0.95)), url('https://lfgzdsbklhyaqnyiquta.supabase.co/storage/v1/object/public/bait-alrashid/page-download/logo.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+            animation: cinematicZoom 25s infinite alternate ease-in-out;
+        }
+
+        @keyframes cinematicZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 35px 25px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            position: relative;
+            z-index: 10;
+        }
+
+        img.logo {
+            width: 120px;
+            height: 120px;
+            /* 🌟 تم التعديل هنا: مربع بحواف دائرية ليشبه أيقونات التطبيقات */
+            border-radius: 28px;
+            object-fit: cover;
+            border: 3px solid #ffffff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 0 0 10px 0;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 14px;
+            color: #e0e0e0;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 18px;
+            margin-bottom: 10px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+        }
+
+        .btn-android {
+            background-color: #23A38B;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-android:hover {
+            background-color: #1c8873;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .btn span {
+            display: flex;
+            flex-direction: column;
+            text-align: right;
+        }
+
+        .btn small {
+            font-size: 12px;
+            font-weight: normal;
+            opacity: 0.85;
+            margin-top: 3px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- صورة الشعار (أيقونة التطبيق المربعة) -->
+    <img src="logo.jpg" alt="شعار بيت الراشد" class="logo">
+
+    <h1>تطبيق بيت الراشد</h1>
+    <p>اضغط على الزر أدناه لتحميل النسخة الرسمية والأحدث من التطبيق لهواتف الأندرويد.</p>
+
+    <!-- زر تحميل الأندرويد فقط -->
+    <a href="https://github.com/ali-dhya96/bayt-alrashid/releases/download/v1.0.4/bayt_alrashid_v1.0.4.apk" class="btn btn-android">
+        <svg viewBox="0 0 24 24"><path d="M17.523 15.341c-.551 0-.998-.447-.998-.999s.447-.998.998-.998c.552 0 .999.446.999.998s-.447.999-.999.999zm-11.046 0c-.552 0-.999-.447-.999-.999s.447-.998.999-.998c.551 0 .998.446.998.998s-.447.999-.998.999zm11.233-6.173l1.832-3.175c.19-.329.078-.75-.251-.941-.329-.19-.75-.079-.941.25l-1.859 3.222c-1.428-.65-3.033-1.01-4.738-1.01s-3.31.36-4.738 1.01l-1.859-3.222c-.191-.329-.612-.44-.941-.25-.329.191-.441.612-.251.941l1.832 3.175c-3.155 1.722-5.285 5.011-5.549 8.833h22c-.264-3.822-2.394-7.111-5.549-8.833z"/></svg>
+        <span>
+            تحميل التطبيق الآن (APK)
+            <small>لأجهزة أندرويد فقط</small>
+        </span>
+    </a>
+</div>
+
+</body>
+</html>
