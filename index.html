@@ -9,7 +9,6 @@
             box-sizing: border-box;
         }
 
-        /* 🌟 أنيميشن لتحريك الخلفية ببطء */
         @keyframes cinematicZoom {
             0% { transform: scale(1); }
             100% { transform: scale(1.2); }
@@ -30,7 +29,6 @@
             background-color: #164841;
         }
 
-        /* 🌟 الطبقة الخلفية المتحركة */
         body::before {
             content: "";
             position: absolute;
@@ -102,7 +100,6 @@
             flex-shrink: 0;
         }
 
-        /* زر الأندرويد */
         .btn-android {
             background-color: #23A38B;
             color: white;
@@ -115,7 +112,6 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
 
-        /* زر الويندوز */
         .btn-windows {
             background-color: #0f2c27;
             color: white;
@@ -135,7 +131,6 @@
             flex-grow: 1;
         }
 
-        /* 🌟 تنسيق العنوان مع رقم الإصدار */
         .btn-title-row {
             display: flex;
             align-items: center;
@@ -144,7 +139,6 @@
             margin-bottom: 3px;
         }
 
-        /* 🌟 تصميم شارة رقم الإصدار (Badge) */
         .version-badge {
             background: rgba(255, 255, 255, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.4);
@@ -165,36 +159,77 @@
 <body>
 
 <div class="container">
-    <!-- صورة الشعار -->
     <img src="logo.jpg" alt="شعار بيت الراشد" class="logo">
 
     <h1>نظام إدارة المالية والعونات - بيت الراشد</h1>
     <p>اختر النسخة المناسبة لجهازك للتحميل والمتابعة.</p>
 
-    <!-- زر تحميل الأندرويد (تطبيق الميدان) -->
-    <a href="https://github.com/ali-dhya96/bayt-alrashid/releases/download/v1.0.6/bayt_alrashid_v1.0.6.apk" class="btn btn-android">
+    <!-- الأزرار الآن تحتوي على IDs للتحكم بها عبر الجافاسكربت -->
+    <a href="#" id="android-link" class="btn btn-android">
         <svg viewBox="0 0 24 24"><path d="M17.523 15.341c-.551 0-.998-.447-.998-.999s.447-.998.998-.998c.552 0 .999.446.999.998s-.447.999-.999.999zm-11.046 0c-.552 0-.999-.447-.999-.999s.447-.998.999-.998c.551 0 .998.446.998.998s-.447.999-.998.999zm11.233-6.173l1.832-3.175c.19-.329.078-.75-.251-.941-.329-.19-.75-.079-.941.25l-1.859 3.222c-1.428-.65-3.033-1.01-4.738-1.01s-3.31.36-4.738 1.01l-1.859-3.222c-.191-.329-.612-.44-.941-.25-.329.191-.441.612-.251.941l1.832 3.175c-3.155 1.722-5.285 5.011-5.549 8.833h22c-.264-3.822-2.394-7.111-5.549-8.833z"/></svg>
         <span class="btn-content">
             <div class="btn-title-row">
                 <span>تحميل تطبيق الأندرويد</span>
-                <span class="version-badge">v1.0.6</span>
+                <span class="version-badge" id="android-version">جاري التحديث...</span>
             </div>
             <small>لجميع الأعضاء والمستخدمين</small>
         </span>
     </a>
 
-    <!-- زر تحميل نظام الإدارة للويندوز -->
-    <a href="https://github.com/ali-dhya96/bayt-alrashid/releases/download/v1.0.6/bayt-alrashid-v1.0.6.setup.exe" class="btn btn-windows">
+    <a href="#" id="windows-link" class="btn btn-windows">
         <svg viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-10.95L24 0v11.4h-13.051M0 12.6h9.75v9.451L0 20.699m10.949-1.35H24V24l-13.051-1.8z"/></svg>
         <span class="btn-content">
             <div class="btn-title-row">
                 <span>نظام الإدارة (Windows)</span>
-                <span class="version-badge">v1.0.6</span>
+                <span class="version-badge" id="windows-version">جاري التحديث...</span>
             </div>
             <small>خاص بالمسؤولين والإداريين فقط</small>
         </span>
     </a>
 </div>
+
+<!-- 🌟 السكربت المسؤول عن جلب أحدث إصدار من GitHub -->
+<script>
+    async function fetchLatestGitHubRelease() {
+        const repo = 'ali-dhya96/bayt-alrashid';
+        const apiUrl = `https://api.github.com/repos/${repo}/releases/latest`;
+
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) throw new Error('Network response was not ok');
+            
+            const data = await response.json();
+            const latestVersion = data.tag_name; // مثال: v1.0.6
+
+            // تحديث نصوص الشارات برقم الإصدار الجديد
+            document.getElementById('android-version').innerText = latestVersion;
+            document.getElementById('windows-version').innerText = latestVersion;
+
+            // تحديث الروابط بناءً على الملفات المرفوعة في الـ Release
+            data.assets.forEach(asset => {
+                const fileName = asset.name.toLowerCase();
+                const downloadUrl = asset.browser_download_url;
+
+                if (fileName.endsWith('.apk')) {
+                    document.getElementById('android-link').href = downloadUrl;
+                } else if (fileName.endsWith('.exe')) {
+                    document.getElementById('windows-link').href = downloadUrl;
+                }
+            });
+
+        } catch (error) {
+            console.error('فشل في جلب التحديثات من GitHub:', error);
+            // روابط وأرقام احتياطية في حال فشل الاتصال
+            document.getElementById('android-version').innerText = 'v1.0.6';
+            document.getElementById('windows-version').innerText = 'v1.0.6';
+            document.getElementById('android-link').href = 'https://github.com/ali-dhya96/bayt-alrashid/releases/latest';
+            document.getElementById('windows-link').href = 'https://github.com/ali-dhya96/bayt-alrashid/releases/latest';
+        }
+    }
+
+    // تشغيل الدالة فور تحميل الصفحة
+    fetchLatestGitHubRelease();
+</script>
 
 </body>
 </html>
